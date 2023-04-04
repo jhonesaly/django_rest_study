@@ -3,10 +3,10 @@ from rest_framework import serializers
 from tag.models import Tag
 
 
-class TagSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    name = serializers.CharField(max_length=255)
-    slug = serializers.SlugField()
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ['id', 'name', 'slug']
 
 
 class RecipeSerializer(serializers.Serializer):
