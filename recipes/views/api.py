@@ -60,3 +60,17 @@ def recipe_api_detail(request, pk):
     elif request.method == 'DELETE':
         recipe.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view()
+def tag_api_detail(request, pk):
+    tag = get_object_or_404(
+        Tag.objects.all(),
+        pk=pk
+    )
+    serializer = TagSerializer(
+        instance=tag,
+        many=False,
+        context={'request': request},
+    )
+    return Response(serializer.data)
