@@ -2,15 +2,15 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from tag.models import Tag
 
 from ..models import Recipe
 from ..serializers import RecipeSerializer, TagSerializer
 
 
-@api_view(http_method_names=['get', 'post'])
-def recipe_api_list(request):
-    if request.method == 'GET':
+class RecipeAPIv2List(APIView):
+    def get(self, request):
         recipes = Recipe.objects.get_published()[:10]
         serializer = RecipeSerializer(
             instance=recipes,
@@ -18,7 +18,8 @@ def recipe_api_list(request):
             context={'request': request},
         )
         return Response(serializer.data)
-    elif request.method == 'POST':
+
+    def post(self, request):
         serializer = RecipeSerializer(
             data=request.data,
             context={'request': request},
