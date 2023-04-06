@@ -6,6 +6,11 @@ from rest_framework import test
 
 
 class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
+    def get_recipe_api_list(self):
+        api_url = reverse('recipes:recipes-api-list')
+        response = self.client.get(api_url)
+        return response
+
     def test_recipe_api_list_returns_status_code_200(self):
         api_url = reverse('recipes:recipes-api-list')
         response = self.client.get(api_url)
