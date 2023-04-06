@@ -29,6 +29,17 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         )
         return response.data.get('access')
 
+    def get_recipe_raw_data(self):
+        return {
+            'title': 'This is the title',
+            'description': 'This is the description',
+            'preparation_time': 1,
+            'preparation_time_unit': 'Minutes',
+            'servings': '1',
+            'servings_unit': 'Person',
+            'preparation_steps': 'This is the preparation steps.'
+        }
+
     def test_recipe_api_list_returns_status_code_200(self):
         response = self.get_recipe_api_list()
         self.assertEqual(
