@@ -12,8 +12,7 @@ class RecipeAPIv2Test(test.APITestCase, RecipeMixin):
         return response
 
     def test_recipe_api_list_returns_status_code_200(self):
-        api_url = reverse('recipes:recipes-api-list')
-        response = self.client.get(api_url)
+        response = self.get_recipe_api_list()
         self.assertEqual(
             response.status_code,
             200
